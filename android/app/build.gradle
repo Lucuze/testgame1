@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    namespace "com.saengwal.hero"
     compileSdk 34
     defaultConfig {
         applicationId "com.saengwal.hero"
