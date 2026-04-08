@@ -1,0 +1,6 @@
+# Gradle build artifacts
+.gradle/
+build/
+local.properties
+*.iml
+.idea/
