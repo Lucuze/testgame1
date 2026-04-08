@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#FFF9C4" />
+  <title>똑똑 생활왕 👑</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== 배경 애니메이션 ===== -->
+<div class="bg-anim" aria-hidden="true">
+  <div class="cloud cloud1">☁️</div>
+  <div class="cloud cloud2">☁️</div>
+  <div class="cloud cloud3">🌤️</div>
+  <div class="butterfly bf1">🦋</div>
+  <div class="butterfly bf2">🦋</div>
+  <div class="star st1">⭐</div>
+  <div class="star st2">✨</div>
+  <div class="star st3">⭐</div>
+  <div class="animal an1">🐰</div>
+  <div class="animal an2">🐻</div>
+  <div class="animal an3">🐥</div>
+  <div class="animal an4">🐱</div>
+</div>
+
+<!-- ===== 초기(스플래시) 화면 ===== -->
+<div id="screen-splash" class="screen active" role="main" aria-label="시작 화면">
+  <div class="splash-content">
+    <div class="mascot-wrap" aria-label="부엉이 마스코트">
+      <div class="owl owl-happy" id="splash-owl">
+        <div class="owl-body">
+          <div class="owl-face">
+            <div class="owl-eyes">
+              <div class="owl-eye left"><div class="pupil"></div></div>
+              <div class="owl-eye right"><div class="pupil"></div></div>
+            </div>
+            <div class="owl-beak">🔶</div>
+          </div>
+          <div class="owl-wings">
+            <div class="wing left"></div>
+            <div class="wing right"></div>
+          </div>
+          <div class="owl-feet">
+            <div class="foot"></div>
+            <div class="foot"></div>
+          </div>
+        </div>
+        <div class="speech-bubble" id="splash-bubble">안녕! 오늘도 함께 배워볼까? 🌟</div>
+      </div>
+    </div>
+    <h1 class="game-title">똑똑 생활왕 👑</h1>
+    <div class="name-section">
+      <label for="player-name" class="sr-only">학생 이름</label>
+      <input
+        type="text"
+        id="player-name"
+        class="name-input"
+        placeholder="이름을 입력해주세요 😊"
+        maxlength="10"
+        aria-label="학생 이름 입력"
+      />
+    </div>
+    <button class="btn btn-start" id="btn-start" aria-label="게임 시작">
+      🎮 시작하기!
+    </button>
+  </div>
+</div>
+
+<!-- ===== 메인 화면 ===== -->
+<div id="screen-main" class="screen" role="main" aria-label="메인 화면">
+  <div class="main-header">
+    <div class="small-owl" id="main-owl" aria-label="부엉이 마스코트">
+      <div class="owl owl-happy mini">
+        <div class="owl-body">
+          <div class="owl-face">
+            <div class="owl-eyes">
+              <div class="owl-eye left"><div class="pupil"></div></div>
+              <div class="owl-eye right"><div class="pupil"></div></div>
+            </div>
+            <div class="owl-beak">🔶</div>
+          </div>
+          <div class="owl-wings">
+            <div class="wing left"></div>
+            <div class="wing right"></div>
+          </div>
+        </div>
+        <div class="speech-bubble small" id="main-bubble">어떤 것을 배울까요? 🌈</div>
+      </div>
+    </div>
+    <h2 class="welcome-msg" id="welcome-msg">안녕하세요! 👋</h2>
+  </div>
+  <div class="main-buttons">
+    <button class="btn btn-mode btn-safety" id="btn-safety" aria-label="안전 히어로 게임 시작">
+      <span class="btn-icon">🚦</span>
+      <span class="btn-label">안전 히어로</span>
+    </button>
+    <button class="btn btn-mode btn-health" id="btn-health" aria-label="몸이 아파요 게임 시작">
+      <span class="btn-icon">🤒</span>
+      <span class="btn-label">몸이 아파요</span>
+    </button>
+    <button class="btn btn-mode btn-meal" id="btn-meal" aria-label="식사 예절 챔피언 게임 시작">
+      <span class="btn-icon">🍽️</span>
+      <span class="btn-label">식사 예절 챔피언</span>
+    </button>
+    <button class="btn btn-record" id="btn-records" aria-label="기록표 보기">
+      <span class="btn-icon">📊</span>
+      <span class="btn-label">기록표</span>
+    </button>
+    <button class="btn btn-settings-main" id="btn-settings" aria-label="설정 열기">
+      <span class="btn-icon">⚙️</span>
+      <span class="btn-label">설정</span>
+    </button>
+  </div>
+</div>
+
+<!-- ===== 설정 모달 ===== -->
+<div id="modal-settings" class="modal hidden" role="dialog" aria-modal="true" aria-label="설정">
+  <div class="modal-content">
+    <h2 class="modal-title">⚙️ 설정</h2>
+    <div class="settings-group">
+      <label for="bgm-volume">🎵 배경음 볼륨</label>
+      <input type="range" id="bgm-volume" min="0" max="100" value="70" aria-label="배경음 볼륨" />
+      <span id="bgm-vol-display">70%</span>
+    </div>
+    <div class="settings-group">
+      <label for="sfx-volume">🔊 효과음 볼륨</label>
+      <input type="range" id="sfx-volume" min="0" max="100" value="80" aria-label="효과음 볼륨" />
+      <span id="sfx-vol-display">80%</span>
+    </div>
+    <button class="btn btn-close-modal" id="btn-close-settings" aria-label="설정 닫기">✅ 저장</button>
+  </div>
+</div>
+
+<!-- ===== 게임 설정 화면 ===== -->
+<div id="screen-game-setup" class="screen" role="main" aria-label="게임 설정 화면">
+  <div class="setup-content">
+    <button class="btn-back" id="setup-back" aria-label="뒤로 가기">← 뒤로</button>
+    <h2 class="setup-title" id="setup-mode-title">🚦 안전 히어로</h2>
+    <div class="setup-section">
+      <h3>📊 난이도 선택</h3>
+      <div class="option-row" role="group" aria-label="난이도 선택">
+        <button class="btn btn-option active" data-option="difficulty" data-value="easy" aria-pressed="true">하 😊</button>
+        <button class="btn btn-option" data-option="difficulty" data-value="medium" aria-pressed="false">중 😐</button>
+        <button class="btn btn-option" data-option="difficulty" data-value="hard" aria-pressed="false">상 😤</button>
+      </div>
+    </div>
+    <div class="setup-section">
+      <h3>📝 문제 개수</h3>
+      <div class="option-row" role="group" aria-label="문제 개수 선택">
+        <button class="btn btn-option active" data-option="questionCount" data-value="5" aria-pressed="true">5문제</button>
+        <button class="btn btn-option" data-option="questionCount" data-value="10" aria-pressed="false">10문제</button>
+        <button class="btn btn-option" data-option="questionCount" data-value="15" aria-pressed="false">15문제</button>
+      </div>
+    </div>
+    <div class="setup-section">
+      <h3>⏱️ 스톱워치</h3>
+      <div class="option-row" role="group" aria-label="스톱워치 사용 여부">
+        <button class="btn btn-option" data-option="stopwatch" data-value="true" aria-pressed="false">사용 ✅</button>
+        <button class="btn btn-option active" data-option="stopwatch" data-value="false" aria-pressed="true">미사용 ❌</button>
+      </div>
+    </div>
+    <div class="setup-section hint-info" aria-live="polite">
+      <p>💡 힌트는 문제당 최대 <strong>3회</strong> 사용할 수 있어요!</p>
+    </div>
+    <button class="btn btn-go" id="btn-start-game" aria-label="게임 시작">🎮 게임 시작!</button>
+  </div>
+</div>
+
+<!-- ===== 게임 진행 화면 ===== -->
+<div id="screen-game" class="screen" role="main" aria-label="게임 진행 화면">
+  <div class="game-header">
+    <div class="progress-section">
+      <span class="progress-text" id="progress-text" aria-live="polite">1 / 10 문제</span>
+      <div class="progress-bar-wrap" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="진행도">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+    </div>
+    <div class="stopwatch-wrap hidden" id="stopwatch-wrap" aria-live="off">
+      <span>⏱️</span>
+      <span id="stopwatch-display" aria-label="경과 시간">00:00</span>
+    </div>
+  </div>
+
+  <div class="game-mascot" aria-label="부엉이 마스코트 반응">
+    <div class="owl owl-happy" id="game-owl">
+      <div class="owl-body">
+        <div class="owl-face">
+          <div class="owl-eyes">
+            <div class="owl-eye left"><div class="pupil"></div></div>
+            <div class="owl-eye right"><div class="pupil"></div></div>
+          </div>
+          <div class="owl-beak">🔶</div>
+        </div>
+        <div class="owl-wings">
+          <div class="wing left"></div>
+          <div class="wing right"></div>
+        </div>
+      </div>
+      <div class="speech-bubble small" id="game-owl-bubble" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="combo-display hidden" id="combo-display" aria-live="assertive">
+    <span id="combo-text">🔥 2연속 정답!</span>
+  </div>
+
+  <div class="question-card" role="region" aria-label="문제">
+    <p class="question-text" id="question-text" aria-live="polite"></p>
+    <div class="question-emoji" id="question-emoji" aria-hidden="true"></div>
+  </div>
+
+  <div class="choices-grid" id="choices-grid" role="group" aria-label="선택지"></div>
+
+  <button class="btn btn-hint" id="btn-hint" aria-label="힌트 사용">
+    💡 힌트 (<span id="hint-count">3</span>)
+  </button>
+</div>
+
+<!-- ===== 결과 화면 ===== -->
+<div id="screen-result" class="screen" role="main" aria-label="결과 화면">
+  <div class="result-content">
+    <div class="result-owl-wrap" aria-hidden="true">
+      <div class="owl" id="result-owl">
+        <div class="owl-body">
+          <div class="owl-face">
+            <div class="owl-eyes">
+              <div class="owl-eye left"><div class="pupil"></div></div>
+              <div class="owl-eye right"><div class="pupil"></div></div>
+            </div>
+            <div class="owl-beak">🔶</div>
+          </div>
+          <div class="owl-wings">
+            <div class="wing left"></div>
+            <div class="wing right"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2 class="result-title" id="result-title">결과</h2>
+    <div class="result-name" id="result-name"></div>
+    <div class="result-score" id="result-score"></div>
+    <div class="result-stars" id="result-stars" aria-label="별점"></div>
+    <div class="result-time hidden" id="result-time"></div>
+    <div class="result-praise" id="result-praise" aria-live="polite"></div>
+    <div class="result-buttons">
+      <button class="btn btn-result" id="btn-review" aria-label="틀린 문제 복습">📝 복습하기</button>
+      <button class="btn btn-result" id="btn-teacher-view" aria-label="교사에게 보여주기">👩‍🏫 교사에게 보여주기</button>
+      <button class="btn btn-result" id="btn-leaderboard" aria-label="리더보드 보기">🏆 리더보드</button>
+      <button class="btn btn-result" id="btn-retry" aria-label="다시 하기">🔄 다시 하기</button>
+      <button class="btn btn-result" id="btn-other-game" aria-label="다른 게임 하기">🎮 다른 게임</button>
+    </div>
+  </div>
+
+  <!-- 퍼펙트 이스터에그 오버레이 -->
+  <div id="perfect-overlay" class="hidden" aria-live="assertive" role="alert">
+    <div class="perfect-content">
+      <div class="confetti-wrap" id="confetti-wrap" aria-hidden="true"></div>
+      <div class="perfect-crown" aria-hidden="true">👑</div>
+      <h2 class="perfect-title">🎊 퍼펙트!</h2>
+      <p class="perfect-msg">당신은 진짜 생활왕이에요! 👑✨</p>
+      <button class="btn btn-perfect-close" id="btn-perfect-close" aria-label="닫기">✨ 감사해요!</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 복습 화면 ===== -->
+<div id="screen-review" class="screen" role="main" aria-label="오답 복습 화면">
+  <div class="review-content">
+    <button class="btn-back" id="review-back" aria-label="결과 화면으로 돌아가기">← 뒤로</button>
+    <h2 class="review-title">📝 오답 복습</h2>
+    <div id="review-list" role="list"></div>
+  </div>
+</div>
+
+<!-- ===== 교사 보기 화면 ===== -->
+<div id="screen-teacher" class="screen screen-teacher" role="main" aria-label="교사 결과 화면">
+  <div class="teacher-content">
+    <h1 class="teacher-title">똑똑 생활왕 👑 결과</h1>
+    <div class="teacher-info" id="teacher-info"></div>
+    <button class="btn btn-teacher-close" id="btn-teacher-close" aria-label="닫기" onclick="exitTeacherView()">← 돌아가기</button>
+  </div>
+</div>
+
+<!-- ===== 리더보드 화면 ===== -->
+<div id="screen-leaderboard" class="screen" role="main" aria-label="리더보드 화면">
+  <div class="leaderboard-content">
+    <button class="btn-back" id="lb-back" aria-label="뒤로 가기">← 뒤로</button>
+    <h2 class="lb-title">🏆 리더보드</h2>
+    <div class="lb-filters" role="group" aria-label="게임 모드 필터">
+      <button class="btn btn-tab active" data-mode="all" aria-pressed="true">전체</button>
+      <button class="btn btn-tab" data-mode="safety" aria-pressed="false">🚦 안전</button>
+      <button class="btn btn-tab" data-mode="health" aria-pressed="false">🤒 건강</button>
+      <button class="btn btn-tab" data-mode="meal" aria-pressed="false">🍽️ 식사</button>
+    </div>
+    <div id="lb-list" role="list"></div>
+  </div>
+</div>
+
+<!-- ===== 기록표 화면 ===== -->
+<div id="screen-records" class="screen" role="main" aria-label="기록표 화면">
+  <div class="records-content">
+    <button class="btn-back" id="records-back" aria-label="뒤로 가기">← 뒤로</button>
+    <h2 class="records-title">📊 기록표</h2>
+    <div class="rec-tabs" role="tablist" aria-label="게임 모드 탭">
+      <button class="btn btn-tab active" role="tab" data-mode="safety" aria-selected="true">🚦 안전</button>
+      <button class="btn btn-tab" role="tab" data-mode="health" aria-selected="false">🤒 건강</button>
+      <button class="btn btn-tab" role="tab" data-mode="meal" aria-selected="false">🍽️ 식사</button>
+    </div>
+    <div class="date-filter">
+      <label for="date-filter-input">날짜 필터:</label>
+      <input type="date" id="date-filter-input" aria-label="날짜 필터" />
+      <button class="btn btn-small" id="btn-clear-date" aria-label="날짜 필터 초기화">초기화</button>
+    </div>
+    <div id="records-table-wrap" role="region" aria-label="기록 목록"></div>
+    <div class="graph-section">
+      <h3>📈 정답률 추이</h3>
+      <div class="graph-wrap" id="graph-wrap" role="img" aria-label="정답률 추이 그래프"></div>
+    </div>
+    <div class="rec-actions">
+      <button class="btn btn-print" id="btn-print" aria-label="인쇄하기">🖨️ 인쇄</button>
+      <button class="btn btn-reset" id="btn-reset-records" aria-label="기록 초기화">🗑️ 기록 초기화</button>
+    </div>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
